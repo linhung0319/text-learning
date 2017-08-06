@@ -36,12 +36,20 @@ def parseOutText(f):
 		for i in ['\n', '\t', '\r']:
 			text_string = text_string.replace(i, " ")
 		logger.debug('content(remove punctuation):\n%s', text_string) 
-		###
-
+		### split the text string into individual words, stem each word,
+        	### and append the stemmed word to words (make sure there's a single
+        	### space between each stemmed word)
+		stemmer = SnowballStemmer('english')
+		text_list = text_string.strip().split(' ')
+		words = ''
+		for word in text_list:
+			if len(word):
+				words = words + stemmer.stem(word) + ' '
+	logger.debug('content(stem each word, single space between each word):\n%s', words)
+	return words
 def main():
 	f = open("test_email.txt", "r")
 	parseOutText(f)
-
-
+	
 if __name__ == '__main__':
 	main()

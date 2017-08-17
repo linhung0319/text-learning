@@ -6,6 +6,18 @@
 
 ## Getting Started
 
+>本程式以python3執行，並使用函式庫nltk, numpy, scipy, sklearn
+
+**以下有兩種方式執行程式:**
+
+- 下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
+  - 執行 **startup.py** ，下載並解壓縮Enron Dataset至./maildir
+  - 執行 **vectorize_text.py** ，將原始資料處理為 **word_data.pkl** 和 **email_authors.pkl**
+  - 使用 **word_data.pkl** 和 **email_authors.pkl** ，執行主程式
+
+- 直接使用已處理過後的資料：
+  - 使用 **word_data.pkl** 和 **email_authors.pkl** ，並直接執行主程式
+
 ## Preprocess
 
 >將Enron Dataset 中來自Crist和Sara的郵件進行處理
@@ -15,7 +27,11 @@
 >2. 將內容部份的文字進行Stem和TFIDF轉換，得到每個字詞的重要性權重
 
 - 執行 **vectorize_text.py** 
-
-  - 得到所有email內容的文字儲存而成的list **word_data.pkl**，和每個字對應的作者 **email_authors.pkl**
-
-**email_preprocess.py** 會讀取 **word_data.pkl** 和 **email_authors.pkl** 並將這些字詞進行TFIDF轉換，讓每個字詞都有其重要性權重，刪除掉其中
+  - 將email內容的文字進行Stem轉換 ( **parse_out_email_text.py** )
+  - 將轉換後的文字以list的形式儲存成 **word_data.pkl**
+  - 每個字對應的作者以list的形式儲存成 **email_authors.pkl**
+  
+- **email_preprocess.py**   
+  - 讀取 **word_data.pkl** 和 **email_authors.pkl** 並將這些字詞進行TFIDF轉換，計算出每個字詞的重要性權重
+  - 刪除掉其中出現過於頻繁的字詞(過於頻繁的字詞不具備代表性)
+  - 將字詞與其作者分為Training Set 和 Testing Set

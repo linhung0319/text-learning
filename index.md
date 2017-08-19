@@ -1,4 +1,4 @@
-## Parse out email text
+## Parse Out Email Text
 
 >1.讀取email文件，並從中擷取出email的內容
 >
@@ -85,4 +85,96 @@ for word in text_list:
 
 ```
 hi everyon if you can read this messag your proper use parseouttext pleas proceed to the next part of the project
+```
+
+## Pickle Email Text
+
+>1.讀取紀錄Sara和Chris的Email文件路徑
+>
+>2.經由ParseOutText函式將Email的內容去除掉標點符號和進行Stem轉換
+>
+>3.使用Pickle儲存經過處理後的Email內容
+
+#### 引入所需的Library
+
+函式parseOutText的內容，請見於上一章 **Parse Out Email Text** 的解釋
+
+```python
+import os
+import pickle
+
+from parse_out_email_text import parseOutText
+```
+
+#### 讀取紀錄Sara和Chris的Email文件路徑
+
+./maildir資料夾下儲存了Enron DataSet，其內存在海量的Email文件，因此需要從中找尋出只屬於Sara和Chris的Email文件
+
+**from_sara.txt** , **from_chris.txt** 紀錄了在Enron Dataset當種只屬於Sara和Chris的Email文件路徑，例如：
+
+```
+###擷取自from_sara.txt
+
+maildir/bailey-s/deleted_items/101.
+maildir/bailey-s/deleted_items/106.
+maildir/bailey-s/deleted_items/132.
+maildir/bailey-s/deleted_items/185.
+.
+.
+.
+```
+
+因為 **pickle_email_text.py** 存在於 **./preprocess** 資料夾當中，所以需要在Sara和Chris的Email文件路徑的前面加上../，並將其儲存於path當中
+
+```python
+from_sara = open('from_sara.txt', 'r')
+from_chris = open('from_chris.txt', 'r')
+
+for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
+	for path in from_person:	
+		path = os.path.join('..', path[:-1])
+		email = open(path, 'r')
+```
+
+其結果為：
+
+```
+###擷取自from_sara.txt路徑被轉換後的結果
+
+../maildir/bailey-s/deleted_items/101.
+../maildir/bailey-s/deleted_items/106.
+../maildir/bailey-s/deleted_items/132.
+../maildir/bailey-s/deleted_items/185.
+.
+.
+.
+```
+
+#### 經由ParseOutText函式將Email的內容去除掉標點符號和進行Stem轉換
+
+```python
+text_string = parseOutText(email)
+```
+
+#### 使用Pickle儲存經過處理後的Email內容
+
+將Email內容以list的方式儲存於 **word_data** ，list當中的每一個Index對應一封Email
+
+同時將Email的作者以list的方式儲存於 **email_authors** ，屬於Sara的Email計為0，屬於Chris則計為1
+
+```python
+### append the text to word_data
+word_data.append(text_string)
+### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
+if name == "sara":
+	email_authors.append(0)
+else:
+	email_authors.append(1)
+```
+
+使用Pickle儲存 **word_data** 和 **email_authors**
+
+```python
+pickle.dump(word_data, open('word_data.pkl', 'wb'))
+pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```

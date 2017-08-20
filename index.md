@@ -178,3 +178,17 @@ else:
 pickle.dump(word_data, open('word_data.pkl', 'wb'))
 pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```
+
+# Find Signature
+
+>有些Sara和Chris的Email，在結尾會有他們的署名 **Sara Shackleton**, **Chris Germany** ，若將這些字詞放入分析模型當中，會使分析發生嚴重的錯誤
+>
+>例如， **Sara Shackleton** 這兩個字，可能大量存在於來自Sara的Email當中，這就導致分析模型會將這兩個字當作判別為Sara郵件的重要依據，只要出現Sara或Shackleton字詞的郵件便會被判別為來自Sara。 然而，若是Chris在他的Email當中恰巧提到Sara，這可能導致分析模型因此將Chris的郵件誤判為Sara的郵件，降低分析模型的判別成功率，所以在進行分析前，需要把 **Sara Shackleton** 和 **Chris Germany** 從字詞中去掉
+>
+>除了上述的四個字以外，可能還存在類似署名的字詞存在於郵件當中，需要將其找出
+
+**Decision Tree** 分析模型若是Feature數量(字詞種類數量)遠大於Training Dataset數量(當作訓練資料的Email文件數量)，則會有Overfitting發生，分析模型過於符合Training Dataset，使得分析模型在Testing Dataset上的表現不佳
+
+然而，若是在Email內存在類似署名的字詞，則就算發生了Overfitting，但分析模型在Testing Dataset上仍會有很好的表現
+
+所以為了找出是否仍有類似署名的字詞存在於Email當中，故意讓 **Decision Tree** Overfitting，再檢查其在Testing Dataset上的表現。若表現極為良好，則表示仍存在署名，需要找出此時Tfidf值最高的字詞，刪除字詞後，再次檢查分析模型在Testing Dataset上的表現，直到分析成功率有顯著的下降

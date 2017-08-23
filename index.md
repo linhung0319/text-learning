@@ -179,7 +179,7 @@ pickle.dump(word_data, open('word_data.pkl', 'wb'))
 pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```
 
-# Find Signature
+## Find Signature
 
 >有些Sara和Chris的Email，在結尾會有他們的署名 **Sara Shackleton**, **Chris Germany** ，若將這些字詞放入分析模型當中，會使分析發生嚴重的錯誤
 >
@@ -191,4 +191,54 @@ pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 
 然而，若是在Email內存在類似署名的字詞，則就算發生了Overfitting，但分析模型在Testing Dataset上仍會有很好的表現
 
-所以為了找出是否仍有類似署名的字詞存在於Email當中，故意讓 **Decision Tree** Overfitting，再檢查其在Testing Dataset上的表現。若表現極為良好，則表示仍存在署名，需要找出此時Tfidf值最高的字詞，刪除字詞後，再次檢查分析模型在Testing Dataset上的表現，直到分析成功率有顯著的下降
+所以為了找出是否仍有類似署名的字詞存在於Email當中，故意讓 **Decision Tree** Overfitting，再檢查其在Testing Dataset上的表現。若表現極為良好，則表示仍存在署名，需要找出此時對分析模型最具有判別能力的字詞，刪除此字詞後，再次檢查分析模型在Testing Dataset上的表現，直到分析成功率有顯著的下降
+
+#### 引入所需的Library
+
+```python
+import pickle
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+```
+
+#### 處理字詞
+
+如上一章 **Email Preprocess** 方式將資料分為Training, Testing Dataset，再經過Tfidf轉換
+
+原先選取當作Training Dataset的Email數量有15820封，作為判斷依據的Word Feature有38260種，為了讓 **Decision Tree** Overfitting，需要讓Training樣本數量遠小於Word Feature數量，因此以下只選取150封Email當作Training Dataset
+
+```python
+### a classic way to overfit is to use a small number
+### of data points and a large number of features;
+### train on only 150 events to put ourselves in this regime
+features_train = features_train[:150].toarray()
+labels_train   = labels_train[:150]
+```
+
+#### Decision Tree Classifier
+
+使用sklearn的Decision Tree Classifier，以150封Email作Training Dataset訓練模型，並使用此模型分析Testing Dataset的Email屬於Sara還是Chris
+
+```python
+clf = DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+```
+
+#### 分類成功率和字詞重要性
+ 
+分類成功率 = 分類成功的Email數量 / Email的總數量 
+
+字詞重要性 ： 利用
+
+```python
+### Accuracy score
+logger.info('The Accuracy Score of the Decision Tree Classifier: %s', accuracy_score(labels_test, pred))
+
+### The important feature
+for index, importance_value in enumerate(clf.feature_importances_):
+	if importance_value > 0.01:	
+		logger.info('(feature, importance value): %s', (vectorizer.get_feature_names()[index], importance_value))
+```

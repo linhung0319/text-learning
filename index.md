@@ -231,7 +231,19 @@ pred = clf.predict(features_test)
  
 分類成功率 = 分類成功的Email數量 / Email的總數量 
 
-字詞重要性 ： 利用
+字詞重要性 ： Decision Tree Classifier當中，一個字詞作為分類Email的依據，與其他字詞相比其重要的程度，在sklearn裡採用Gini Importance來計算一個字詞在Decision Tree Classifier中的重要性
+
+Gini Importance: 
+
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20\Delta%20I%20=%20I_{Parent}%20-%20P_{1}I_{1}%20-%20P_{2}I_{2}):其值越大，表示分類出的樣本越純粹，例如：若依據某一個字詞分類出的Email其來自於Sara或Chris的比率越高，表示此字詞在分析模型中具有越強的判斷力
+
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20I_{Parent}):未利用某一個字詞進行分類的Gini Index
+
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20I_{1})和![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20I_{2}):利用某一個字詞分類後的Gini Index
+
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20P_{1})和![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20P_{2}):分類後其個數佔全部的比率
+
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20Imp(X)=\sum%20P%20\Delta%20I):計算在Decision Tree的所有節點中，使用某一個字詞作為分類依據時其Gini Index的總和，其值為Gini Importance
 
 ```python
 ### Accuracy score
@@ -242,3 +254,4 @@ for index, importance_value in enumerate(clf.feature_importances_):
 	if importance_value > 0.01:	
 		logger.info('(feature, importance value): %s', (vectorizer.get_feature_names()[index], importance_value))
 ```
+

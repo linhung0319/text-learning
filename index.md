@@ -229,7 +229,7 @@ pred = clf.predict(features_test)
 
 #### 分類成功率和字詞重要性
  
-分類成功率 = 分類成功的Email數量 / Email的總數量 
+分類成功率(Accuracy Score) = 分類成功的Email數量 / Email的總數量 
 
 字詞重要性 ： Decision Tree Classifier當中，一個字詞作為分類Email的依據，與其他字詞相比其重要的程度，在sklearn裡採用Gini Importance來計算一個字詞在Decision Tree Classifier中的重要性
 
@@ -243,7 +243,7 @@ Gini Importance:
 
 ![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20P_{1})和![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20P_{2}):分類後其個數佔全部的比率
 
-![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20Imp(X)=\sum%20P%20\Delta%20I):計算在Decision Tree的所有節點中，使用某一個字詞作為分類依據時其Gini Index的總和，其值為Gini Importance
+![](http://chart.googleapis.com/chart?cht=tx&chl=\large%20Imp(X)=\sum%20P%20\Delta%20I):計算在Decision Tree的所有節點中，使用某一個字詞X作為分類依據時，其Gini Index乘以其權重的總和，此值為Gini Importance
 
 ```python
 ### Accuracy score
@@ -255,3 +255,30 @@ for index, importance_value in enumerate(clf.feature_importances_):
 		logger.info('(feature, importance value): %s', (vectorizer.get_feature_names()[index], importance_value))
 ```
 
+在應該發生Overfitting的情況下，其分類成功率卻高達98.8％，查看字詞重要性，發現 **sshacklensf** 高達0.74，且此字詞與署名 **shackleton** 相似，因此要將此字詞刪除
+
+```python
+The Accuracy Score of the Decision Tree Classifier: 0.988054607509
+(feature, importance value): ('charg', 0.022922344191732679)
+(feature, importance value): ('mtaylornsf', 0.051999762286800991)
+(feature, importance value): ('nonprivilegedpst', 0.1069864696049095)
+(feature, importance value): ('sshacklensf', 0.74529175671503534)
+(feature, importance value): ('tjonesnsf', 0.072799667201521381)
+```
+刪除**sshacklensf** 後， 分類成功率降為97.4%， **cgermannsf** 的字詞重要性為0.64，且此字與署名 **germany** 相似，因此予以刪除
+
+```python
+The Accuracy Score of the Decision Tree Classifier: 0.974402730375
+(feature, importance value): ('62502pst', 0.27852609882659246)
+(feature, importance value): ('cgermannsf', 0.64418087472201613)
+(feature, importance value): ('reliant', 0.050884575747165983)
+(feature, importance value): ('tariff', 0.026408450704225324)
+```
+
+刪除兩個為署名的字詞後，分類成功率降為83.1%
+
+```python
+The Accuracy Score of the Decision Tree Classifier: 0.831058020478
+```
+
+因為是署名而刪除的字詞為 ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"]

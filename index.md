@@ -179,6 +179,71 @@ pickle.dump(word_data, open('word_data.pkl', 'wb'))
 pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```
 
+## Email Preprocess
+
+>1.將Email分為Training Dataset和Testing Dataset
+>
+>2.對Email的字詞進行TFIDF轉換
+>
+>3.將字詞(Word Feature)依照其重要性進行篩選，以減少分析模型的Feature數量
+
+#### 引入所需的Library
+
+```python
+import pickle
+
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_selection import SelectPercentile, f_classif
+```
+
+#### 將Email分為Training Dataset和Testing Dataset
+
+分析模型需要有一組Training Dataset，包括文本的內容和其對應的正確作者以建立模型。Testing Dataset則是用來測試建立的模型的準確度
+
+設定原始資料的90%為Training Dataset，10%為Testing Dataset
+
+```python
+### test_size is the percentage of events assigned to the test set
+### (remainder go into training)
+features_train, features_test, labels_train, labels_test = train_test_split(word_data, authors, test_size=0.1, random_state=0)
+```
+
+#### 對字詞進行TFIDF轉換
+
+TF(Term Frequency): 字詞在文件中出現的次數， 理論上同一個字詞在文件中出現的次數越多，表示越重要
+
+IDF(Inverse Document Frequency): log(總文件數 / 某個字詞出現的文件數)， 若一個字詞在大部分文件都有出現，表現此字詞普遍存在，並不屬於特定某個文件，因此較不重要
+
+TFIDF即是將 **TF** 乘以 **IDF**
+
+```python
+### text vectorization--go from strings to lists of numbers
+vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, stop_words='english')
+features_train_transformed = vectorizer.fit_transform(features_train)
+features_test_transformed  = vectorizer.transform(features_test)
+```
+
+sublinear: TF = 1 + log(TF)
+
+max_df=0.5: 若某個字詞出現在文件的個數佔總文件50%以上，則不使用此字詞
+
+stop_words: [a, I, you, me, my, the,...]，在英文中很常用但不具備意義或太過普遍出現，不具備被辨識能力的詞彙
+
+#### 將字詞(Word Feature)根據重要性進行篩選
+
+```python
+### feature selection, because text is super high dimensional and can be really computationally chewy as a result
+selector = SelectPercentile(f_classif, percentile=10)
+selector.fit(features_train_transformed, labels_train)
+features_train_transformed = selector.transform(features_train_transformed).toarray()
+features_test_transformed  = selector.transform(features_test_transformed).toarray()
+```
+
+f_classif: 以F-Test來計算字詞(Word Feature)的重要性
+
+percentile=10: 只留下10%最重要的字詞，其餘皆被剔除
+
 ## Find Signature
 
 >有些Sara和Chris的Email，在結尾會有他們的署名 **Sara Shackleton**, **Chris Germany** ，若將這些字詞放入分析模型當中，會使分析發生嚴重的錯誤

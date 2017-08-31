@@ -244,7 +244,15 @@ f_classif: 以F-Test來計算字詞(Word Feature)的重要性
 
 percentile=10: 只留下10%最重要的字詞，其餘皆被剔除
 
-## Find Signature
+#### 結論
+
+>1.總共有17578封Email，其中15820封作為Traning Dataset，1758封作為Testing Dataset
+>
+>2.屬於Sara和Chris的Email其數量在Training, Testing Dataset中雖然不相等，但數量極為接近
+>
+>3.作為分析模型判斷依據的Word Feature總共有3825個
+
+### Find Signature(補充)
 
 >有些Sara和Chris的Email，在結尾會有他們的署名 **Sara Shackleton**, **Chris Germany** ，若將這些字詞放入分析模型當中，會使分析發生嚴重的錯誤
 >

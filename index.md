@@ -8,11 +8,11 @@
   - **Preprocess**:對Email進行處理，擷取內容，並以TFIDF計算文字（Word Feature）在每一封郵件的重要性
   - **SVM**:利用Support Vector Machine演算法，藉由處理過的文字(Word Feature)，建立分辨寄件者的模型
 
-#Preprocess
+# Preprocess
 
 >
 
-## Parse Out Email Text
+## 1.Parse Out Email Text
 
 >1.讀取email文件，並從中擷取出email的內容
 >
@@ -101,7 +101,7 @@ for word in text_list:
 hi everyon if you can read this messag your proper use parseouttext pleas proceed to the next part of the project
 ```
 
-## Pickle Email Text
+## 2.Pickle Email Text
 
 >1.讀取紀錄Sara和Chris的Email文件路徑
 >
@@ -193,7 +193,7 @@ pickle.dump(word_data, open('word_data.pkl', 'wb'))
 pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```
 
-## Email Preprocess
+## 3.Email Preprocess
 
 >1.將Email分為Training Dataset和Testing Dataset
 >
@@ -246,6 +246,8 @@ stop_words: [a, I, you, me, my, the,...]，在英文中很常用但不具備意�
 
 #### 將字詞(Word Feature)根據重要性進行篩選
 
+利用F-Test，決定字詞(Word Feature)的重要程度，由於字詞的種類過多，會影響到分析模型的執行速度，因此只取其中10%最重要的字詞當作分析模型分析的依據
+
 ```python
 ### feature selection, because text is super high dimensional and can be really computationally chewy as a result
 selector = SelectPercentile(f_classif, percentile=10)
@@ -266,7 +268,7 @@ percentile=10: 只留下10%最重要的字詞，其餘皆被剔除
 >
 >3.作為分析模型判斷依據的Word Feature總共有3825個
 
-### Find Signature(補充)
+## 4.Find Signature(補充)
 
 >有些Sara和Chris的Email，在結尾會有他們的署名 **Sara Shackleton**, **Chris Germany** ，若將這些字詞放入分析模型當中，會使分析發生嚴重的錯誤
 >

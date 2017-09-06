@@ -106,6 +106,8 @@ for word in text_list:
 hi everyon if you can read this messag your proper use parseouttext pleas proceed to the next part of the project
 ```
 
+---
+
 ## 2.Pickle Email Text
 
 >1.讀取紀錄Sara和Chris的Email文件路徑
@@ -198,6 +200,8 @@ pickle.dump(word_data, open('word_data.pkl', 'wb'))
 pickle.dump(email_authors, open('email_authors.pkl', 'wb'))
 ```
 
+---
+
 ## 3.Email Preprocess
 
 >1.將Email分為Training Dataset和Testing Dataset
@@ -272,6 +276,8 @@ percentile=10: 只留下10%最重要的字詞，其餘皆被剔除
 >2.屬於Sara和Chris的Email其數量在Training, Testing Dataset中雖然不相等，但數量極為接近
 >
 >3.作為分析模型判斷依據的Word Feature總共有3825個
+
+---
 
 ## 4.Find Signature(補充)
 
@@ -376,3 +382,7 @@ The Accuracy Score of the Decision Tree Classifier: 0.831058020478
 ```
 
 因為是署名而刪除的字詞為 ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"]
+
+---
+## SVM
+---

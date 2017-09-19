@@ -39,7 +39,7 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 
 	### test_size is the percentage of events assigned to the test set
 	### (remainder go into training)
-	features_train, features_test, labels_train, labels_test = train_test_split(word_data, email_authors, test_size=0.1, random_state=0)
+	features_train, features_test, labels_train, labels_test = train_test_split(word_data, email_authors, test_size=0.9, random_state=0)
 	
 	### text vectorization--go from strings to lists of numbers
 	vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, stop_words='english')
@@ -57,8 +57,8 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 	logger.info('The number of Chris training emails: %s', sum(labels_train))
 	logger.info('The number of Sara training emails: %s', len(labels_train) - sum(labels_train))
 	logger.info('The number of testing emails: %s', len(labels_test))
-	logger.info('The number of Chris training emails: %s', sum(labels_test))
-	logger.info('The number of Sara training emails: %s', len(labels_test) - sum(labels_test))
+	logger.info('The number of Chris testing emails: %s', sum(labels_test))
+	logger.info('The number of Sara testing emails: %s', len(labels_test) - sum(labels_test))
 	logger.info('The number of word feature: %s', len(features_train_transformed[0]))
 	
 	return features_train_transformed, features_test_transformed, labels_train, labels_test

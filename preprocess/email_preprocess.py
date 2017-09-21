@@ -59,7 +59,7 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 	support = np.asarray(selector.get_support())
 	selected_features_name = features_name[support]
 
-	logger.info('The number =of all emails: %s', len(labels_train) + len(labels_test))
+	logger.info('The number of all emails: %s', len(labels_train) + len(labels_test))
 	logger.info('The number of training emails: %s', len(labels_train))
 	logger.info('The number of Chris training emails: %s', sum(labels_train))
 	logger.info('The number of Sara training emails: %s', len(labels_train) - sum(labels_train))

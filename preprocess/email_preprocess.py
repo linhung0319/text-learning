@@ -5,6 +5,7 @@ logging.basicConfig(level=logging.INFO,
 		    format='%(name)s - %(message)s')
 
 import pickle
+import numpy as np
 
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -21,9 +22,10 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 
         after this, the feaures and labels are put into numpy arrays, which play nice with sklearn functions
 
-        4 objects are returned:
+        5 objects are returned:
             -- training/testing features
             -- training/testing labels
+	    -- features name
 
 	"""
 	
@@ -52,7 +54,12 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 	features_train_transformed = selector.transform(features_train_transformed).toarray()
 	features_test_transformed  = selector.transform(features_test_transformed).toarray()
 
-	logger.info('The number of all emails: %s', len(labels_train) + len(labels_test))
+	### the word corresponding to each feature, after selected by SelectPercentile
+	features_name = np.asarray(vectorizer.get_feature_names())
+	support = np.asarray(selector.get_support())
+	selected_features_name = features_name[support]
+
+	logger.info('The number =of all emails: %s', len(labels_train) + len(labels_test))
 	logger.info('The number of training emails: %s', len(labels_train))
 	logger.info('The number of Chris training emails: %s', sum(labels_train))
 	logger.info('The number of Sara training emails: %s', len(labels_train) - sum(labels_train))
@@ -61,7 +68,8 @@ def preprocess(word_file='../preprocess/word_data.pkl', authors_file='../preproc
 	logger.info('The number of Sara testing emails: %s', len(labels_test) - sum(labels_test))
 	logger.info('The number of word feature: %s', len(features_train_transformed[0]))
 	
-	return features_train_transformed, features_test_transformed, labels_train, labels_test
+	return features_train_transformed, features_test_transformed, labels_train, labels_test, selected_features_name
+
 def main():
 	preprocess()
 

@@ -14,7 +14,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer, accuracy_score
 
 from email_preprocess import preprocess
-from plot_gallery import plot_accuracy_score
+from plot_gallery import plot_accuracy_score, plot_feature_importance
 
 import matplotlib.pyplot as plt
 
@@ -27,7 +27,7 @@ def main():
 	### features_train and features_test are the features for the training
 	### and testing datasets, respectively
 	### labels_train and labels_test are the corresponding item labels
-	features_train, features_test, labels_train, labels_test = preprocess()
+	features_train, features_test, labels_train, labels_test, features_name = preprocess()
 
 	### scaled features and labels are 1/10 training data for tuning the 
 	### parameter in SVM
@@ -35,20 +35,31 @@ def main():
 	scaled_labels = labels_train[:int(len(labels_train) / 10)]
 
 	### find the best parameter (kernel, C, gamma) in SVM
-	param = find_best_param(scaled_features, scaled_labels,
+	param = find_best_param(scaled_features,
+			        scaled_labels,
 				scoring=make_scorer(accuracy_score),
 				C_range=np.logspace(-2, 10, 13),
 				gamma_range=np.logspace(-9, 3, 13),
 				kernel_range=('linear', 'rbf'),
 				kernel='linear')
-	###
-	
 
+	### linear SVM to fit the training data
+	clf = SVC(**param)
+	clf.fit(features_train, labels_train)
+	
+	### plot the top feature importance of the SVM binary classification result
+	plot_feature_importance(clf.coef_.ravel(),
+			        features_name,
+			        top_features=20)
+	
+	
 def find_best_param(features, labels, scoring, C_range, gamma_range, kernel_range, kernel=None):
 	"""
+	    Find the best parameter in SVM
+
 	    scoring - the method to determine the accuracy in SVM
 	    C_range, gamma_range - tuning parameters in SVM
-	    kernel_range - different kernel in SVM, ex: 'linear', 'rbf', 'poly'
+	    kernel_range - different kernel in SVM, ex: ['linear', 'rbf', 'poly']
 
 	    kernel - choose the best parameter in a given kernel
 	    

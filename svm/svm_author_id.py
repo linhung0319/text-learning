@@ -8,10 +8,11 @@ import sys
 sys.path.append('../preprocess')
 
 import numpy as np
+import pandas as pd
 
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import make_scorer, accuracy_score
+from sklearn.metrics import make_scorer, accuracy_score, confusion_matrix, recall_score, precision_score
 
 from email_preprocess import preprocess
 from plot_gallery import plot_accuracy_score, plot_feature_importance
@@ -46,13 +47,16 @@ def main():
 	### linear SVM to fit the training data
 	clf = SVC(**param)
 	clf.fit(features_train, labels_train)
+	labels_predict = clf.predict(features_test)
 	
 	### plot the top feature importance of the SVM binary classification result
 	plot_feature_importance(clf.coef_.ravel(),
 			        features_name,
 			        top_features=20)
 	
-	
+	### accuracy score, confusion matrix, precision score, recall score
+	show_accuracy(labels_test, labels_predict)
+
 def find_best_param(features, labels, scoring, C_range, gamma_range, kernel_range, kernel=None):
 	"""
 	    Find the best parameter in SVM
@@ -91,6 +95,34 @@ def find_best_param(features, labels, scoring, C_range, gamma_range, kernel_rang
 		kernel_index = kernel_range.index(kernel)	
 		index = np.unravel_index(score[:, :, kernel_index].argmax(), score[:, :, kernel_index].shape)
 		return {'C': C_range[index[0]], 'gamma': gamma_range[index[1]], 'kernel': kernel}
+
+
+def show_accuracy(y_true, y_predict):
+	"""
+	    Include accuracy score, confusion matrix, precision score, recall score
+	
+	    y_true - true result of the classification
+	    y_predict - predicted result of the classification
+	"""
+	logger = logging.getLogger(show_accuracy.__name__)
+
+	### accuracy score
+	logger.info('Accuracy Score: %s', accuracy_score(y_true, y_predict))
+
+	### confusion matrix
+	collabel = ('Predicted Sara', 'Predicted Chris')
+	rowlabel = ('True Sara', 'True Chris')
+	df = pd.DataFrame(confusion_matrix(y_true, y_predict),
+			  index=rowlabel,
+			  columns=collabel)
+	logger.info('Confusion Matrix:\n%s', df)
+
+	### precision score
+	logger.info('Precision Score: %s', precision_score(y_true, y_predict))
+
+	### recall score
+	logger.info('Recall Score: %s', recall_score(y_true, y_predict))
+
 
 if __name__ == '__main__':
 	main()

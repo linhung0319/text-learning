@@ -1,6 +1,6 @@
 # Text Learning
 
->Enron Dataset 包含許多email文件，從中選取寄信者來自Crist和Sara的郵件，對一部份來自Crist和Sara的郵件作Machine Learning，試圖建構一個模型，在不知道寄件者的情況下，僅憑郵件的內容，便可判別此郵件來自Crist或Sara
+>[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz) 包含許多email文件，從中選取寄信者來自Crist和Sara的郵件，對一部份來自Crist和Sara的郵件作Machine Learning，試圖建構一個模型，在不知道寄件者的情況下，僅憑郵件的內容，便可判別此郵件來自Crist或Sara
 >
 >更詳細對此程式演算法的解釋請點[這裡](https://linhung0319.github.io/text-learning/)
 
@@ -8,21 +8,19 @@
 
 >本程式以python3.6.0執行，使用函式庫nltk, numpy, scipy, sklearn, pandas, matplotlib
 >
->在Terminal輸入： clone 
+>在Terminal輸入： clone https://github.com/linhung0319/text-learning.git
+>
+>執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
-**以下有兩種方式執行程式:**
+主程式使用的是已處理後的Data， **word_data.pkl** 和 **email_authors.pkl**
 
-- 直接使用已處理過後的資料：
-  - 直接執行 **svm** 資料夾內的主程式 **svm_author_id.py**
-
-- 下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
+- 若要產生處理後的Data，需下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
   - 執行 **startup.py** ，下載並解壓縮Enron Dataset至./maildir
   - 執行 **pickle_email_text.py** ，將原始資料處理為 **word_data.pkl** 和 **email_authors.pkl**
-  - 使用 **word_data.pkl** 和 **email_authors.pkl** ，再執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
 ## Preprocess
 
->將Enron Dataset 中來自Crist和Sara的郵件進行處理
+>將Enron Dataset，來自Crist和Sara的郵件進行處理
 >
 >1. 只留下郵件中的內容部份
 >

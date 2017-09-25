@@ -6,17 +6,19 @@
 
 ## Getting Started
 
->本程式以python3執行，並使用函式庫nltk, numpy, scipy, sklearn
+>本程式以python3.6.0執行，使用函式庫nltk, numpy, scipy, sklearn, pandas, matplotlib
+>
+>在Terminal輸入： clone 
 
 **以下有兩種方式執行程式:**
+
+- 直接使用已處理過後的資料：
+  - 直接執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
 - 下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
   - 執行 **startup.py** ，下載並解壓縮Enron Dataset至./maildir
   - 執行 **pickle_email_text.py** ，將原始資料處理為 **word_data.pkl** 和 **email_authors.pkl**
   - 使用 **word_data.pkl** 和 **email_authors.pkl** ，再執行 **svm** 資料夾內的主程式 **svm_author_id.py**
-
-- 直接使用已處理過後的資料：
-  - 使用 **word_data.pkl** 和 **email_authors.pkl** ，並直接執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
 ## Preprocess
 

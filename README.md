@@ -12,12 +12,6 @@
 >
 >執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
-主程式使用的是已處理後的Data， **word_data.pkl** 和 **email_authors.pkl**
-
-- 若要產生處理後的Data，需下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
-  - 執行 **startup.py** ，下載並解壓縮Enron Dataset至./maildir
-  - 執行 **pickle_email_text.py** ，將原始資料處理為 **word_data.pkl** 和 **email_authors.pkl**
-
 ## Preprocess
 
 >將Enron Dataset，來自Crist和Sara的郵件進行處理
@@ -25,6 +19,12 @@
 >1. 只留下郵件中的內容部份
 >
 >2. 將內容部份的文字進行Stem和TFIDF轉換，得到每個字詞的重要性權重
+
+主程式使用的是已處理後的Data， **word_data.pkl** 和 **email_authors.pkl**
+
+- 若要產生處理後的Data，需下載[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz)：
+  - 執行 **startup.py** ，下載並解壓縮Enron Dataset至./maildir
+  - 執行 **pickle_email_text.py** ，將原始資料處理為 **word_data.pkl** 和 **email_authors.pkl**
 
 - 執行 **pickle_email_text.py** 
   - 將email內容的文字進行Stem轉換 ( **parse_out_email_text.py** )

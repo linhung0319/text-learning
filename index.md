@@ -442,4 +442,4 @@ kernel: 將Sample投影到更高維度，讓Sample在高維度下能被線性Hyp
 
 以下為不同參數下的Accuracy Score:
 
-![]()
+![](https://raw.githubusercontent.com/linhung0319/text-learning/gh-pages/C%20gamma%20Accuracy%20Score.png)

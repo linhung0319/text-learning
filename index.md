@@ -387,7 +387,7 @@ The Accuracy Score of the Decision Tree Classifier: 0.831058020478
 ## SVM
 ---
 
-## 1.svm author id
+## 1.SVM Author ID
 
 >1.調整SVM的參數，找出精準度最高的SVM模型
 >
@@ -397,9 +397,9 @@ The Accuracy Score of the Decision Tree Classifier: 0.831058020478
 
 #### 引入所需的library
 
-- **email_preprocess.py** 和 **plot_gallery** 是自訂函式
+- **email_preprocess.py** 和 **plot_gallery.py** 是自訂函式
   - **email_preprocess.py** ： 如上一章Preprocess所述， 用來處理Data的格式
-  - **plot_gallery** : 使用matplotlib進行繪圖
+  - **plot_gallery.py** : 使用matplotlib進行繪圖
 
 ```python
 import numpy as np
@@ -430,5 +430,11 @@ clf.fit(features, labels)
 |:----------|:---------------|
 | C         | 1e-2 ~ 1e10    |
 | gamma     | 1e-9 ~ 1e3     |
-| kernel    | linear, kernel |
+| kernel    | linear, rbf    |
+
+C: 決定如何對待錯誤分類，若C值小則允許大量的錯誤分類，讓分類函數簡單，若C值大則盡可能不允許錯誤分類，讓分類函數複雜
+
+gamma: 決定若一個Sample被分類為1，則離這個Sample多遠的範圍也會被分類為1，小的值為遠，大的值為近
+
+kernel: 將Sample投影到更高維度，讓Sample在高維度下能被線性Hyper Plane分割， rbf為將Sample以常態分佈函數投影到高維度再進行分割，linear則是直接在現維度便進行線性分割
 

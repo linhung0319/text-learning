@@ -224,12 +224,12 @@ from sklearn.feature_selection import SelectPercentile, f_classif
 
 分析模型需要有一組Training Dataset，包括文本的內容和其對應的正確作者以建立模型。Testing Dataset則是用來測試建立的模型的準確度
 
-設定原始資料的90%為Training Dataset，10%為Testing Dataset
+設定原始資料的10%為Training Dataset，90%為Testing Dataset
 
 ```python
 ### test_size is the percentage of events assigned to the test set
 ### (remainder go into training)
-features_train, features_test, labels_train, labels_test = train_test_split(word_data, authors, test_size=0.1, random_state=0)
+features_train, features_test, labels_train, labels_test = train_test_split(word_data, authors, test_size=0.9, random_state=0)
 ```
 
 #### 對字詞進行TFIDF轉換
@@ -271,11 +271,11 @@ percentile=10: 只留下10%最重要的字詞，其餘皆被剔除
 
 #### 結論
 
->1.總共有17578封Email，其中15820封作為Traning Dataset，1758封作為Testing Dataset
+>1.總共有17578封Email，其中1757封作為Traning Dataset，15821封作為Testing Dataset
 >
 >2.屬於Sara和Chris的Email其數量在Training, Testing Dataset中雖然不相等，但數量極為接近
 >
->3.作為分析模型判斷依據的Word Feature總共有3825個
+>3.作為分析模型判斷依據的Word Feature總共有1708個
 
 ---
 
@@ -386,3 +386,49 @@ The Accuracy Score of the Decision Tree Classifier: 0.831058020478
 ---
 ## SVM
 ---
+
+## 1.svm author id
+
+>1.調整SVM的參數，找出精準度最高的SVM模型
+>
+>2.找出最能用來判別Email寄件者的文字詞 （word feature）
+>
+>3.分析此SVM模型的精準度，判別能力(Accuracy Score, Confusion Matrix, Precision Score, Recall Score)
+
+#### 引入所需的library
+
+- **email_preprocess.py** 和 **plot_gallery** 是自訂函式
+  - **email_preprocess.py** ： 如上一章Preprocess所述， 用來處理Data的格式
+  - **plot_gallery** : 使用matplotlib進行繪圖
+
+```python
+import numpy as np
+import pandas as pd
+
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import make_scorer, accuracy_score, confusion_matrix, recall_score, precision_score
+
+from email_preprocess import preprocess
+from plot_gallery import plot_accuracy_score, plot_feature_importance
+```
+
+#### 調整SVM的參數
+
+利用sklearn的GridSearchCV，放入不同參數到SVM當中，找出最佳的參數
+
+```python
+param_grid = {'C': C_range,
+	      'gamma': gamma_range,
+	      'kernel': kernel_range}
+
+clf = GridSearchCV(SVC(), param_grid, scoring)
+clf.fit(features, labels)
+```
+
+| Parameter | Range          |
+|:----------|:---------------|
+| C         | 1e-2 ~ 1e10    |
+| gamma     | 1e-9 ~ 1e3     |
+| kernel    | linear, kernel |
+

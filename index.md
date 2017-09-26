@@ -417,6 +417,8 @@ from plot_gallery import plot_accuracy_score, plot_feature_importance
 
 利用sklearn的GridSearchCV，放入不同參數到SVM當中，找出最佳的參數
 
+由於每跑一組參數都要重新建構一次SVM的模型，為了不要讓程式跑太久，因此僅放入1/10的Training Data，約200封Email
+
 ```python
 param_grid = {'C': C_range,
 	      'gamma': gamma_range,
@@ -438,3 +440,6 @@ gamma: 決定若一個Sample被分類為1，則離這個Sample多遠的範圍也
 
 kernel: 將Sample投影到更高維度，讓Sample在高維度下能被線性Hyper Plane分割， rbf為將Sample以常態分佈函數投影到高維度再進行分割，linear則是直接在現維度便進行線性分割
 
+以下為不同參數下的Accuracy Score:
+
+![]()

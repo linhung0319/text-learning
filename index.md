@@ -1,6 +1,6 @@
 >利用機器學習依據郵件中使用的文字，自動判斷郵件的寄件人
 >
->Enron Dataset 包含許多email文件，從中選取寄信者來自Crist和Sara的郵件，對一部份來自Crist和Sara的郵件作Machine Learning，試圖建構一個模型，在不知道寄件者的情況下，想要僅憑郵件的內容，便可判別此郵件到底是來自Crist還是Sara
+>Enron Dataset 包含許多email文件，從中選取寄信者來自Crist和Sara的郵件，對一部份來自Chris和Sara的郵件作Machine Learning，試圖建構一個模型，在不知道寄件者的情況下，想要僅憑郵件的內容，便可判別此郵件到底是來自Crist還是Sara
 
 - 此程式可分為兩個部份， Preprocess和SVM
   - **Preprocess**:對Email進行處理，擷取內容，並以TFIDF計算文字（Word Feature）在每一封郵件的重要性

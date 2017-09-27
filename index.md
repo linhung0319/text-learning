@@ -440,6 +440,22 @@ gamma: 決定若一個Sample被分類為1，則離這個Sample多遠的範圍也
 
 kernel: 將Sample投影到更高維度，讓Sample在高維度下能被線性Hyper Plane分割， rbf為將Sample以常態分佈函數投影到高維度再進行分割，linear則是直接在現維度便進行線性分割
 
-以下為不同參數下的Accuracy Score:
+**以下為不同參數下的Accuracy Score:**
 
 ![](https://raw.githubusercontent.com/linhung0319/text-learning/gh-pages/C%20gamma%20Accuracy%20Score.png)
+
+一般SVM使用的是rbf的kernel來建立模型， 然而當Data的feature維度非常大時，便不太需要將Sample投影到高維度，通常可以直接在現維度找到線性的Hyper Plane作分割
+
+由上圖可以發現，由於Word Feature的維度高達1708個，因此使用linear kernel的SVM模型，其精準度並不比rbf kernel來的低
+
+由於從linear kernel的SVM模型中找出最具判別力的字詞較為簡單，因此底下使用linear kernel的SVM作分析
+
+#### 找出最具判別力的字詞
+
+linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方向，若某一個維度（字詞）在此方向上的比重很大，則表示此維度（字詞）分類Data的能力很強;反之，若在此方向上的分量很小，則表示此維度(字詞)分類Data的能力很差，較不重要
+
+因此，讀取linear kernel SVM的Hyper Plane法向量，可以根據比重，知道哪個Email中的字詞最具有判斷能力
+
+下圖為Sara和Chris的Email中判斷力前20重要的字詞，負的方向為判斷Sara Email的字詞，正的方向為判斷Chris Email的字詞
+
+![]()

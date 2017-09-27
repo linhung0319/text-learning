@@ -58,7 +58,7 @@
 
 ## Conclusion
 
-#### 不同參數下SVM模型的Accuracy Score
+>1. 不同參數下SVM模型的Accuracy Score
 
 下圖為以C, gamma作為調整參數，在linear kernel和rbf (常態分佈) kernel下的Accuracy Score (僅放入1/10的Training Data， 約200封Email)
 
@@ -70,13 +70,17 @@
 
 由於從linear kernel的SVM模型中找出最具判別力的字詞較為簡單，因此使用linear kernel的SVM作分析
 
-#### 找出最具判別力的字詞
+>2. 找出最具判別力的字詞
 
-下圖為Sara和Chris的Email中判斷力前20的字詞，負的方向為判斷Sara Email的字詞，正的方向為判斷Chris Email的字詞
+下圖為Sara和Chris的Email中判斷力前20的字詞
 
 ![](https://raw.githubusercontent.com/linhung0319/text-learning/gh-pages/Feature%20Importance.png)
 
-#### 分析SVM模型的精準度
+linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方向，若某一個維度（字詞）在此方向上的比重很大，則表示此維度（字詞）分類Data的能力很強;反之，若在此方向上的分量很小，則表示此維度(字詞)分類Data的能力很差，較不重要
+
+因此，讀取linear kernel SVM的Hyper Plane法向量，可以根據比重，知道哪個Email中的字詞最具有判斷能力
+
+>3. 分析SVM模型的精準度
 
 - Accuracy Score = 97%
   - 分類成功的Email數量 / 總共的Email數量

@@ -456,6 +456,6 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
 
 因此，讀取linear kernel SVM的Hyper Plane法向量，可以根據比重，知道哪個Email中的字詞最具有判斷能力
 
-下圖為Sara和Chris的Email中判斷力前20重要的字詞，負的方向為判斷Sara Email的字詞，正的方向為判斷Chris Email的字詞
+下圖為Sara和Chris的Email中判斷力前20的字詞，負的方向為判斷Sara Email的字詞，正的方向為判斷Chris Email的字詞
 
-![]()
+![](https://raw.githubusercontent.com/linhung0319/text-learning/gh-pages/Feature%20Importance.png)

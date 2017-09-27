@@ -467,6 +467,7 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
   - Accuracy Score很高表示此模型能很好的判別Sara和Chris的Email
   
 | Confusion Matrix | Predicted Sara | Predicted Chris |
+|:-----------------|:---------------|:----------------|
 | True Sara        | 7568 (TP)      | 312  (FP)       |
 | True Chris       | 146  (FN)      | 7795 (TN)       |
 

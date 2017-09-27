@@ -387,7 +387,7 @@ The Accuracy Score of the Decision Tree Classifier: 0.831058020478
 ## SVM
 ---
 
-## 1.SVM Author ID
+## SVM Author ID
 
 >1.調整SVM的參數，找出精準度最高的SVM模型
 >

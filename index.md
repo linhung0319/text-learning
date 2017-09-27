@@ -459,3 +459,27 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
 下圖為Sara和Chris的Email中判斷力前20的字詞，負的方向為判斷Sara Email的字詞，正的方向為判斷Chris Email的字詞
 
 ![](https://raw.githubusercontent.com/linhung0319/text-learning/gh-pages/Feature%20Importance.png)
+
+#### 分析SVM模型的精準度
+
+- Accuracy Score = 97%
+  - 分類成功的Email數量 / 總共的Email數量
+  - Accuracy Score很高表示此模型能很好的判別Sara和Chris的Email
+  
+- Confusion Matrix
+
+|            | Predicted Sara | Predicted Chris |
+| True Sara  | 7568 (TP)      | 312  (FP)       |
+| True Chris | 146  (FN)      | 7795 (TN)       |
+
+- Precision Score = 96%
+  - TP / (TP + FP)
+  - Precision Score越高，表示Sara的郵件被誤判為Chris的郵件的機率越低
+  
+- Recall Score = 98%
+  - TP / (TP + FN)
+  - Recall Score越高，表示Chris的郵件被誤判為Sara的郵件的機率越低
+  
+由於Precision Score略低於Recall Score，表示Sara的郵件較容易被誤判為Chris的郵件，因此這個模型對Chris郵件的判別力大於Sara郵件
+
+從Confusion Matrix其實也可以很簡單的看出，在Sara和Chris的郵件總數差不多的情況下，Sara的郵件被誤判為Chris的有312封;反之，Chris的郵件被誤判為Sara的146封

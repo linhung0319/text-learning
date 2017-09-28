@@ -18,7 +18,7 @@
 
 ## Preprocess
 
->將Enron Dataset，來自Crist和Sara的郵件進行處理
+>將Enron Dataset，來自Chris和Sara的郵件進行處理
 >
 >1. 只留下郵件中的內容部份
 >

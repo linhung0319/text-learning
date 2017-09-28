@@ -105,8 +105,8 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
 
 ## Reference
 
-1. 此程式主要的演算法，包括建立分析模型前對Data的處理方式，和使用SVM建立分析模型，參考於線上課程網站Udacity的Nano Degree，[Intro to Machine Learning](https://classroom.udacity.com/courses/ud120)
-
-2. 調整SVM模型不同參數的方法，參考於sklearn的[範例頁](http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py)
-
-3. 找出Email文字中最具判斷力的字詞(Word Feature)的方法，參考於[這裡](https://medium.com/@aneesha/visualising-top-features-in-linear-svm-with-scikit-learn-and-matplotlib-3454ab18a14d)
+>1. 此程式主要的演算法，包括建立分析模型前對Data的處理方式，和使用SVM建立分析模型，參考於線上課程網站Udacity的Nano Degree，[Intro to Machine Learning](https://classroom.udacity.com/courses/ud120)
+>
+>2. 調整SVM模型不同參數的方法，參考於sklearn的[範例頁](http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py)
+>
+>3. 找出Email文字中最具判斷力的字詞(Word Feature)的方法，參考於[Visualising Top Features in Linear SVM with Scikit Learn and Matplotlib](https://medium.com/@aneesha/visualising-top-features-in-linear-svm-with-scikit-learn-and-matplotlib-3454ab18a14d)

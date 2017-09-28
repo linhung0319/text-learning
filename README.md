@@ -1,5 +1,9 @@
 # Text Learning
 
+>每個人使用文字都有自己的習慣，習慣強烈的，我們能夠單憑人力就可辨別一份文件或一封Email到底是誰寫的，盡管這份文件或Email並沒有留下任何署名;然而，有些人的用字習慣可能是隱晦的，因而依靠人力很難去辨別原作者，此時就需要去建構Machine Learning的分析模型來解決問題
+>
+>Text Learning是利用Machine Learning的方法，藉由分析文件中文字詞的種類，出現的頻率來建立分辨文件作者的模型
+>
 >[Enron Dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz) 包含許多email文件，從中選取寄信者來自Crist和Sara的郵件，對一部份來自Crist和Sara的郵件作Machine Learning，試圖建構一個模型，在不知道寄件者的情況下，僅憑郵件的內容，便可判別此郵件來自Crist或Sara
 >
 >更詳細對此程式演算法的解釋請點[這裡](https://linhung0319.github.io/text-learning/)

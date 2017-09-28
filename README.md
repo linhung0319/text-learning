@@ -102,3 +102,11 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
 由於Precision Score略低於Recall Score，表示Sara的郵件較容易被誤判為Chris的郵件，因此這個模型對Chris郵件的判別力大於Sara郵件
 
 從Confusion Matrix其實也可以很簡單的看出，在Sara和Chris的郵件總數差不多的情況下，Sara的郵件被誤判為Chris的有312封;反之，Chris的郵件被誤判為Sara的146封
+
+## Reference
+
+1. 此程式主要的演算法，包括建立分析模型前對Data的處理方式，和使用SVM建立分析模型，參考於線上課程網站Udacity的Nano Degree，[Intro to Machine Learning](https://classroom.udacity.com/courses/ud120)
+
+2. 調整SVM模型不同參數的方法，參考於sklearn的[範例頁](http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py)
+
+3. 找出Email文字中最具判斷力的字詞(Word Feature)的方法，參考於[這裡](https://medium.com/@aneesha/visualising-top-features-in-linear-svm-with-scikit-learn-and-matplotlib-3454ab18a14d)

@@ -8,7 +8,7 @@
 >
 >更詳細對此程式演算法的解釋請點[這裡](https://linhung0319.github.io/text-learning/)
 
-## Getting Started
+## To get start
 
 >本程式以python3.6.0執行，使用函式庫nltk, numpy, scipy, sklearn, pandas, matplotlib
 >

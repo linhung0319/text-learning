@@ -8,7 +8,7 @@
 >
 >更詳細對此程式演算法的解釋請點[這裡](https://linhung0319.github.io/text-learning/)
 
-## Get Started
+## Getting Started
 
 >本程式以python3.6.0執行，使用函式庫nltk, numpy, scipy, sklearn, pandas, matplotlib
 >
@@ -16,7 +16,7 @@
 >
 >執行 **svm** 資料夾內的主程式 **svm_author_id.py**
 
-## Preprocess
+## Preprocessing
 
 >將Enron Dataset，來自Chris和Sara的郵件進行處理
 >

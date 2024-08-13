@@ -1,5 +1,13 @@
 # Text Learning
 
+<div markdown>
+  
+  🌏
+  [**English**](https://github.com/linhung0319/text-learning/blob/master/README.md) |
+  Chinese |
+  
+</div>
+
 >每個人使用文字都有自己的習慣，習慣強烈的，我們能夠單憑人力就可辨別一份文件或一封Email到底是誰寫的，盡管這份文件或Email並沒有留下任何署名;然而，有些人的用字習慣可能是隱晦的，因而依靠人力很難去辨別原作者，此時就需要去建構Machine Learning的分析模型來解決問題
 >
 >Text Learning是利用Machine Learning的方法，藉由分析文件中文字詞的種類，出現的頻率來建立分辨文件作者的模型
@@ -114,3 +122,9 @@ linear kernel SVM的Hyper Plane法向量，可以看成是最能分類Data的方
 >2. 調整SVM模型不同參數的方法，參考於sklearn的[範例頁](http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py)
 >
 >3. 找出Email文字中最具判斷力的字詞(Word Feature)的方法，參考於[Visualising Top Features in Linear SVM with Scikit Learn and Matplotlib](https://medium.com/@aneesha/visualising-top-features-in-linear-svm-with-scikit-learn-and-matplotlib-3454ab18a14d)
+
+## Contact Information
+如果你有任何任何問題或建議，請由此聯繫我:
+- Email: linhung0319@gmail.com
+- Portfolio: [My Portfolio](https://linhung0319.vercel.app/)
+- Linkedin: [My Linkedin](https://www.linkedin.com/in/hung-lin/)
